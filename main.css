@@ -1,0 +1,86 @@
+html {
+    --text-color: #F0F0F0;
+    --bg-color: #0F0F0F;
+
+	--user-input: #FFFFFF;
+	--input-border-color: #505050;
+
+    color: var(--text-color);
+    background: var(--bg-color);
+}
+
+noscript {
+    font-size: 5em;
+}
+
+div.album {
+    margin-top : 1em;
+}
+
+input {
+	background: inherit;
+	color: var(--user-input);
+	border-color: var(--input-border-color);
+}
+
+div.buttons {
+	margin-top: 1em;
+}
+
+button {
+	background: inherit;
+	color: inherit;
+	border-color: var(--input-border-color);
+}
+
+button:disabled {
+	cursor: not-allowed;
+	color: var(--input-border-color);
+}
+
+.messages {
+    font-size: 1.5em;
+}
+
+.messages::before {
+	content: "Messages";
+	font-size: 0.5em;
+	border-bottom: solid 1px var(--input-border-color);
+
+}
+
+/* Super hacky line counting in CSS */
+div.output {
+	border: solid 1px var(--input-border-color);
+	font-family: monospace;
+
+	margin-bottom: 1em;
+
+	display: grid;
+	grid-template-columns: minmax(22px, auto) 1fr;
+
+	counter-reset: output-list;
+}
+
+div.output > div > p {
+	margin: 0px;
+}
+
+div.output > div:nth-child(2n+1)::before {
+	/* Use and increment the counter on each element */
+	content: counter(output-list);
+	counter-increment: output-list;
+	padding-right: .5em;
+}
+
+div.output > div:nth-child(2n+1) {
+	background: #000000;
+}
+
+div.output > div:nth-child(4n+2) {
+	background: #202020;
+}
+
+div.output > div:nth-child(4n) {
+	background: #101010;
+}

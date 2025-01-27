@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>mktoc</title>
+		<link href="main.css" rel="stylesheet" />
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<noscript><h1>ENABLE JS!</h1></noscript>
+		<h1>mktoc</h1>
+		<p class="info">
+			Makes a cdrdao TOC file from given tracks. Assumes your files are
+			named 1.wav, 2.wav, etc.
+		</p>
+		<div>
+			MusicBrainz import:
+			<input placeholder="release MBID or URL" id="mbid" />
+			<button id="mb-import" disabled="">Import</button>
+		</div>
+		<div class="album">
+			<input autofocus="true" id="album-name"
+				placeholder="album name" />
+			by <input id="album-artist" placeholder="artist" />
+		</div>
+		<div class="buttons">
+			<button disabled="" id="plus">+</button><button
+				disabled="" id="minus">-</button>
+			<button disabled="" id="generate">Generate</button>
+		</div>
+		<ol id="tracks" class="tracks">
+			<li>
+				<input id="track1-name" placeholder="track name" /> -
+				<input id="track1-artist" placeholder="artist" />
+			</li>
+		</ol>
+		<div id="output" class="output"><div></div><div>Output goes here :^)</div></div>
+		<div id="messages" class="messages"></div>
+	</body>
+</html>
