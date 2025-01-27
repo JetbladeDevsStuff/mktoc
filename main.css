@@ -1,9 +1,9 @@
-html {
+:root {
     --text-color: #F0F0F0;
     --bg-color: #0F0F0F;
 
-	--user-input: #FFFFFF;
-	--input-border-color: #505050;
+    --user-input: #FFFFFF;
+    --input-border-color: #505050;
 
     color: var(--text-color);
     background: var(--bg-color);
@@ -40,6 +40,7 @@ button:disabled {
 
 .messages {
     font-size: 1.5em;
+	min-height: 3em;
 }
 
 .messages::before {
@@ -83,4 +84,16 @@ div.output > div:nth-child(4n+2) {
 
 div.output > div:nth-child(4n) {
 	background: #101010;
+}
+
+footer {
+	font-size: 0.8em;
+}
+
+a:link {
+	color: #FFFFFF;
+}
+
+a:visited {
+	color: #C0C0C0;
 }
