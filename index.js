@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", _ => {
 	const minus = document.getElementById("minus");
 	const generate = document.getElementById("generate");
 	const messages = document.getElementById("messages");
+	const copy = document.getElementById("copy");
+	const download = document.getElementById("download");
 
 	function write_message(str) {
 		let div = document.createElement("div");
@@ -216,6 +218,67 @@ document.addEventListener("DOMContentLoaded", _ => {
 		});
 	}
 
+	function output_to_string() {
+		let ret = "";
+		let emptyct = 0;
+		for (i of document.getElementById("output").children) {
+			if (i.innerText == "") {
+				if (emptyct == 2) {
+					ret += "\n";
+				} else {
+					emptyct++;
+				}
+			} else {
+				ret += i.innerText + "\n";
+				emptyct = 0;
+			}
+		}
+		// remove any em-spaces (U+2003)
+		ret = ret.replaceAll(String.fromCodePoint(0x2003), " ");
+		// remove last newline
+		ret = ret.substring(0, ret.length - 1);
+		for (i of ret) {
+
+		}
+		return ret;
+	}
+
+	function copy_output() {
+		// Clipboard API only works in a secure context
+		if (!window.isSecureContext) {
+			write_message("Copy: not a secure context, please use HTTPS");
+			return;
+		}
+		if (!navigator.clipboard) {
+			write_message("Copy: browser does not support Clipboard API");
+		}
+		navigator.clipboard.writeText(output_to_string());
+	}
+
+	function download_output() {
+		let str
+		try {
+			str = btoa(output_to_string());
+		} catch (e) {
+			if (e instanceof DOMException
+				&& e.name == "InvalidCharacterError") {
+				write_message("Download: Invalid character in output, cannot download");
+			}
+		}
+		let title = document.getElementById("album-name").value.split(" ")[0];
+		if (title == "") {
+			title = "album"
+		}
+		title += ".toc";
+		let a = document.createElement("a");
+		a.href = `data:text/plain;base64,${str}`;
+		a.download = title;
+		a.style.visibility = "hidden";
+		document.body.append(a);
+		a.click();
+		a.remove();
+	}
+
 	mb_import.addEventListener("click", musicbrainz_import);
 	mb_import.removeAttribute("disabled");
 
@@ -227,5 +290,11 @@ document.addEventListener("DOMContentLoaded", _ => {
 
 	generate.addEventListener("click", generate_toc);
 	generate.removeAttribute("disabled");
+
+	copy.addEventListener("click", copy_output);
+	copy.removeAttribute("disabled");
+
+	download.addEventListener("click", download_output);
+	download.removeAttribute("disabled");
 });
 
