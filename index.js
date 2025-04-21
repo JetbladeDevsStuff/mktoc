@@ -233,8 +233,15 @@ document.addEventListener("DOMContentLoaded", _ => {
 				emptyct = 0;
 			}
 		}
-		// remove any em-spaces (U+2003)
+		// Replcements...
+		// Em-spaces (U+2003)
 		ret = ret.replaceAll(String.fromCodePoint(0x2003), " ");
+		// Right Single Quotation Mark (U+2019)
+		ret = ret.replaceAll(String.fromCodePoint(0x2019), "'");
+		// Latin Small Letter E With Acute (U+00E9)
+		ret = ret.replaceAll(String.fromCodePoint(0x00E9), "e");
+		// Hyphen (U+2010)
+		ret = ret.replaceAll(String.fromCodePoint(0x2010), "-");
 		// remove last newline
 		ret = ret.substring(0, ret.length - 1);
 		for (i of ret) {
